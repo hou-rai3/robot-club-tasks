@@ -1,84 +1,32 @@
+/* =========================================
+   Variables & Reset
+   テーマ: Modern Dark & Crimson Red
+   ========================================= */
 :root {
-  --bg: #f4f7f9;
-  --card: #fafafa;
-  --muted: #666;
-  --accent: #0b84ff;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-  margin: 0;
-  background: var(--bg);
-  color: #111;
-}
-
-.app {
-  padding: 12px 20px;
-}
-
-.title-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.title-gif { width: 48px; height: 48px; }
-
-.board { display: grid; gap: 12px; }
-
-.board-task-item {
-  background: var(--card);
-  border-radius: 6px;
-  padding: 12px;
-  box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.drag-handle { cursor: grab; padding: 8px; }
-
-.task-content { flex: 1; }
-
-.status-badge { padding: 4px 8px; border-radius: 999px; font-size: 12px; }
-.status-badge.ok { background: #dff0d8; color:#27632a }
-.status-badge.warn { background: #fff4d6; color:#6c4a00 }
-.status-badge.err { background: #ffe5e5; color:#7a1212 }
-
-input, textarea, select, button { font-family: inherit; }
-
-/* small forms */
-input[type="text"], input[type="date"] {
-  padding: 8px; border-radius: 4px; border: 1px solid #ddd; background: #fff;
-}
-
-/* Completed tasks */
-.completed-task { opacity: 0.6; text-decoration: line-through; }
-
-.task-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-.complete-btn { position: absolute; bottom: 10px; right: 10px; padding: 6px 10px; font-size: 12px; background: #28a745; color: white; border: none; border-radius: 4px; }
-.overall-form { margin-top: 18px; padding: 14px; border: 1px solid #e9ecef; border-radius: 8px; background: #fff; }
-
-.mechanism-editor { display:flex; gap:10px; align-items:center; background: #fff; padding:10px; border-radius:6px; }
-.status-評価完了 { background: #28a745; color: #fff; }
-.status-微調整中 { background: #ffc107; color: #222; }
-.status-実験待ち { background: #17a2b8; color: #fff; }
-.status-未着手 { background: #6c757d; color: #fff; }
-
-.members-task-container { display:flex; gap:15px; overflow-x:auto; padding-bottom:12px }
-.member-column { flex:1; min-width:220px; background: #fff; padding:10px; border-radius:6px; }
-.member-task-item { background: #fff; padding:10px; margin-bottom:8px; border-radius:4px; box-shadow: 0 1px 1px rgba(0,0,0,0.06); cursor: grab; display:flex; align-items:center; gap:8px }
-
-.issue-detail-card { padding: 16px; border: 1px solid #e6e6e6; border-radius: 8px; background: #fff; }
-
-@media (max-width: 800px) { .board-row { flex-direction: column; } }
-:root {
-  --bg: #0b0b0b;
-  --surface: #0f0f12;
-  --card: #141416;
-  --muted: #bfbfbf;
-  --accent: #ffffff;
-  --glass: rgba(255,255,255,0.03);
+  /* Main Palette */
+  --bg-app: #18181b;           /* 背景：真っ黒ではなく深い亜鉛色(Zinc) */
+  --surface: #27272a;          /* カード背景：少し明るいグレー */
+  --surface-sub: #3f3f46;      /* 入力欄やサブエリアの背景 */
+  
+  /* Accents */
+  --primary: #ef4444;          /* メイン：鮮やかで力強い赤 */
+  --primary-dark: #b91c1c;     /* ホバー時の濃い赤 */
+  --primary-glow: rgba(239, 68, 68, 0.25); /* 赤い光彩 */
+  
+  /* Text Colors */
+  --text-main: #f4f4f5;        /* メイン文字：ほぼ白に近いグレー */
+  --text-muted: #a1a1aa;       /* 補足文字：中間のグレー */
+  --text-on-primary: #ffffff;
+  
+  /* Borders & Shadows */
+  --border: #3f3f46;           /* 境界線：背景に馴染むグレー */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 15px var(--primary-glow); /* かっこいい発光表現 */
+  
+  /* Sizes */
+  --radius-md: 12px;
+  --radius-sm: 8px;
 }
 
 html, body, #root {
@@ -87,205 +35,390 @@ html, body, #root {
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--accent);
-  font-family: Inter, 'Segoe UI', Roboto, -apple-system, 'Helvetica Neue', Arial;
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.6;
 }
 
+/* =========================================
+   App Layout & Header (Center Aligned)
+   ========================================= */
 .app {
-  padding: 18px 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
   min-height: 100vh;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 40%), var(--bg);
+  box-sizing: border-box;
 }
 
-/* Header */
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* ヘッダー全体を中央寄せ */
+  margin-bottom: 40px;
+}
+
+/* Title Row */
 .title-row {
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 18px;
-  position: relative;
-}
-
-.app-title {
-  font-weight: 700;
-  font-size: 20px;
-  letter-spacing: 0.2px;
+  justify-content: center; /* タイトルを中央へ */
+  gap: 16px;
+  margin-bottom: 24px;
+  width: 100%;
 }
 
 .title-gif {
-  width: 44px;
-  height: 44px;
-  border-radius: 8px;
-  background: var(--glass);
-  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  padding: 4px;
+  box-shadow: var(--shadow-glow); /* ロゴを少し光らせる */
 }
 
-/* Decorative shapes */
-.decor-circle {
-  position: absolute;
-  right: 12px;
-  top: -6px;
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
-  pointer-events: none;
-  transform: rotate(12deg);
+.app-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 0.05em;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
-.decor-triangle {
-  position: absolute;
-  left: 6px;
-  top: 50px;
-  width: 0;
-  height: 0;
-  border-left: 18px solid transparent;
-  border-right: 18px solid transparent;
-  border-bottom: 30px solid rgba(255,255,255,0.03);
-  opacity: 0.9;
-  pointer-events: none;
+/* Navigation Tabs */
+nav {
+  display: flex;
+  justify-content: center; /* ナビゲーションも中央へ */
+  gap: 12px;
+  width: 100%;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
 }
 
-/* Board & columns */
+nav button {
+  background: transparent;
+  border: 1px solid transparent;
+  padding: 8px 24px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  color: var(--text-main);
+  background-color: var(--surface-sub);
+}
+
+nav button.active {
+  background-color: var(--primary); /* アクティブ時は赤背景 */
+  color: var(--text-on-primary);
+  box-shadow: var(--shadow-glow);
+  border-color: var(--primary);
+}
+
+/* =========================================
+   Headings & Typography
+   ========================================= */
+/* アプリ内のすべての主要見出しを中央寄せにする */
+h1, h2, h3 {
+  text-align: center;
+  color: var(--text-main);
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  border-left: none; /* 左の装飾を削除して中央重視に */
+}
+
+/* =========================================
+   Board & Columns
+   ========================================= */
 .board {
   display: grid;
-  gap: 14px;
+  gap: 30px;
 }
 
 .board-row {
   display: flex;
-  gap: 14px;
+  gap: 24px;
   align-items: flex-start;
 }
 
 .column {
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
-  border-radius: 12px;
-  padding: 12px;
-  min-width: 220px;
+  background-color: transparent;
   flex: 1;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.01);
-  border: 1px solid rgba(255,255,255,0.03);
+  min-width: 280px;
 }
 
 .column-title {
-  font-weight: 600;
-  color: var(--accent);
   font-size: 13px;
-  margin-bottom: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center; /* カラムタイトルも中央へ */
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 8px;
 }
 
-/* Task card */
+/* =========================================
+   Task Cards (Dark Style)
+   ========================================= */
 .board-task-item {
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
-  border-radius: 10px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  margin-bottom: 12px;
+  display: flex;
+  gap: 14px;
+  position: relative;
+  transition: all 0.2s ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.board-task-item:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--text-muted); /* ホバーで少し明るく */
+}
+
+/* Left Accent Bar */
+.left-accent {
+  width: 4px;
+  border-radius: 4px;
+  flex-shrink: 0;
+  box-shadow: 0 0 8px rgba(255,255,255,0.05);
+}
+.left-accent.low { background-color: #52525b; }    /* 暗いグレー */
+.left-accent.medium { background-color: #f59e0b; } /* アンバー（注意） */
+.left-accent.high { 
+  background-color: var(--primary); 
+  box-shadow: 0 0 8px var(--primary); /* 重要項目は赤く光る */
+}
+
+.task-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.task-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-main);
+  margin: 0;
+}
+
+.task-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.task-deadline {
+  font-weight: 700;
+  color: var(--primary); /* 期限は赤文字 */
+}
+
+/* Buttons inside cards */
+.task-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--surface-sub);
+  color: var(--text-muted);
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  background: var(--primary);
+  color: #fff;
+  border-color: var(--primary);
+  box-shadow: var(--shadow-glow);
+}
+
+.btn.primary, .add-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  box-shadow: var(--shadow-glow);
+}
+
+.btn.primary:hover, .add-btn:hover {
+  background: var(--primary-dark);
+}
+
+.drag-handle {
+  cursor: grab;
+  color: var(--text-muted);
+  padding: 4px;
+  opacity: 0.5;
+}
+.drag-handle:hover { opacity: 1; }
+
+/* Completed State */
+.completed-task {
+  opacity: 0.5;
+  background-color: transparent;
+  border-color: transparent;
+}
+.completed-task .task-title {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
+
+/* =========================================
+   Forms (Input Fields)
+   ========================================= */
+input[type="text"], 
+input[type="date"], 
+textarea, 
+select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface-sub); /* 暗い入力欄 */
+  color: var(--text-main);
+  font-size: 14px;
+  transition: all 0.2s;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: var(--surface);
+  box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
+}
+
+/* Overall Form Container */
+.overall-form {
+  background: var(--surface);
+  padding: 24px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  margin-top: 32px;
+  /* フォーム内の要素も中央寄せしたければ以下を追加 */
+  text-align: center; 
+}
+
+/* フォーム内の要素配置調整 */
+.overall-form input, 
+.overall-form textarea {
+  margin-bottom: 12px;
+  text-align: left; /* 入力文字は左揃えに戻す */
+}
+.overall-form button {
+  width: 100%; /* ボタンを幅いっぱいに */
   padding: 12px;
-  box-shadow: 0 6px 12px rgba(0,0,0,0.5);
+  font-size: 15px;
+}
+
+/* =========================================
+   Members & Robot Group Views
+   ========================================= */
+.members-task-container {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 16px;
+}
+/* Scrollbar styling for dark theme */
+.members-task-container::-webkit-scrollbar { height: 8px; }
+.members-task-container::-webkit-scrollbar-track { background: var(--bg-app); }
+.members-task-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+.member-column {
+  min-width: 260px;
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+}
+
+.member-column h3 {
+  color: var(--primary);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 10px;
+  margin-bottom: 16px;
+}
+
+.member-task-item {
+  background: var(--surface-sub);
+  padding: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 8px;
+  border: 1px solid transparent;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.member-task-item:hover { border-color: var(--text-muted); }
+
+/* Mechanism Editor */
+.mechanism-editor {
+  background: var(--surface);
+  padding: 16px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 12px;
-  border: 1px solid rgba(255,255,255,0.02);
-  position: relative;
 }
 
-.board-task-item .left-accent {
-  width: 6px;
-  height: 100%;
-  border-radius: 6px;
-  flex: 0 0 6px;
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #fff;
+}
+.status-評価完了 { background-color: #10b981; }
+.status-微調整中 { background-color: #f59e0b; color: #000; }
+.status-実験待ち { background-color: #3b82f6; }
+.status-未着手   { background-color: #52525b; }
+
+/* =========================================
+   Detail View
+   ========================================= */
+.issue-detail-card {
+  background: var(--surface);
+  padding: 40px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: var(--shadow-glow);
 }
 
-.left-accent.low { background: rgba(255,255,255,0.08); }
-.left-accent.medium { background: rgba(255,255,255,0.16); }
-.left-accent.high { background: rgba(255,255,255,0.28); }
-
-.task-content { flex: 1; }
-
-.task-title {
-  font-weight: 600;
-  font-size: 14px;
-  color: var(--accent);
-  margin-bottom: 6px;
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app { padding: 16px; }
+  .board-row { flex-direction: column; }
+  .title-row { flex-direction: column; }
+  .overall-form button { width: 100%; }
 }
-
-.task-meta { font-size: 12px; color: var(--muted); }
-.task-deadline { font-weight: 700; color: var(--muted); }
-
-.drag-handle { cursor: grab; padding: 8px; color: rgba(255,255,255,0.45); }
-
-.task-actions { display: flex; gap: 8px; align-items: center; }
-
-.btn {
-  background: transparent;
-  border: 1px solid rgba(255,255,255,0.04);
-  padding: 6px 10px;
-  border-radius: 8px;
-  color: var(--accent);
-  font-size: 13px;
-}
-
-.btn.strong {
-  background: rgba(255,255,255,0.04);
-  border-color: rgba(255,255,255,0.06);
-}
-
-/* Inputs */
-input[type="text"], input[type="date"], textarea, select {
-  background: rgba(255,255,255,0.02);
-  border: 1px solid rgba(255,255,255,0.03);
-  color: var(--accent);
-  padding: 8px 10px;
-  border-radius: 8px;
-}
-
-input:focus, textarea:focus, button:focus { outline: none; box-shadow: 0 0 0 3px rgba(255,255,255,0.02); }
-
-/* Completed */
-.completed-task { opacity: 0.6; text-decoration: line-through; }
-
-/* Overall board grid */
-.task-board { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
-
-.complete-btn {
-  position: absolute; bottom: 10px; right: 10px;
-  padding: 6px 10px; font-size: 12px;
-  background: rgba(255,255,255,0.04); color: var(--accent); border: none; border-radius: 8px; cursor: pointer;
-}
-
-.overall-form { margin-top: 18px; padding: 14px; border: 1px solid rgba(255,255,255,0.03); border-radius: 10px; }
-
-/* Robot area */
-.robot-status-card.editable { display: flex; flex-direction: column; gap: 12px; }
-.form-group { display:flex; align-items:center; gap:10px; }
-.form-group label { font-weight:700; flex-shrink:0; }
-.form-group input { width:100%; padding:8px; border-radius:8px }
-.mechanism-editor { display:flex; gap:10px; align-items:center; background: rgba(255,255,255,0.01); padding:10px; border-radius:8px; }
-.mech-name { width:220px; padding:6px; }
-.mech-status-input { width:160px; padding:6px; }
-.status-badge { display:inline-block; padding:4px 8px; border-radius:12px; color:#fff; font-size:12px; margin-left:8px; }
-.status-評価完了 { background: #28a745; }
-.status-微調整中 { background: #ffc107; color:#222; }
-.status-実験待ち { background: #17a2b8; }
-.status-未着手 { background: #6c757d; }
-
-.remove-btn, .add-btn { padding: 6px 10px; border-radius:8px; border:none; cursor:pointer }
-.remove-btn { background:#dc3545; color:#fff }
-.add-btn { background:#007bff; color:#fff }
-
-/* Members */
-.members-task-container { display:flex; gap:15px; overflow-x:auto; padding-bottom:12px }
-.member-column { flex:1; min-width:220px; background: linear-gradient(180deg, rgba(255,255,255,0.01), transparent); padding:10px; border-radius:10px; }
-.member-column h3 { text-align:center; margin-top:0 }
-.member-task-item { background: rgba(255,255,255,0.02); padding:10px; margin-bottom:8px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.4); cursor:grab; display:flex; align-items:center; gap:8px }
-.member-task-item.completed-task { cursor: default }
-.member-task-adder input[type="text"] { width:100%; padding:8px }
-
-/* detail card */
-.issue-detail-card { padding:16px; border-radius:10px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border:1px solid rgba(255,255,255,0.03); }
-
-.board-task-item:hover { transform: translateY(-6px); box-shadow: 0 18px 36px rgba(0,0,0,0.6); }
-
-@media (max-width: 800px) { .board-row { flex-direction: column; } }
