@@ -24,3 +24,8 @@
 • Frontend: React
 • Drag & Drop: @dnd-kit/core, @dnd-kit/sortable
 • Styling: Standard CSS (Modern CSS Variables)
+
+# 開発者
+• 岡部 昊斗
+# License
+This project is licensed under the MIT License.
