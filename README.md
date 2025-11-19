@@ -1,70 +1,20 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+連中に反省を促すアプリ
+(反省点改善管理アプリ)
+活動における「反省」と「課題」を効率的に管理するためのWebアプリケーションである。
+開発の背景
+我々の部活では、ロボコンなどの大会後や定期的な活動の節目に「反省会」を実施している。しかし、これまで反省会で挙がった課題や改善案を十分に管理・追跡する体制が整っておらず、議論した内容が流れてしまうという問題があった。
+そこで、**「反省会で出た課題を確実に記録し、誰が・いつまでに・何をやるべきかを明確にする」**ための専用管理ツールが必要であると考え、本アプリを開発した。
+主な機能
+• 課題（反省点）の管理: What（課題内容）、Who（担当）、When（期限）を明確にしてタスクを追加する。
+• 直感的な操作: dnd-kit を採用し、ドラッグ＆ドロップによるタスクの並び替えやステータス管理が可能である。
+• 視認性の高いUI: ラボやコクピットをイメージした「ダークグレー × クリムゾンレッド」のモダンなデザインを採用した。
+• マルチビュー:
+• 全体一覧: チーム全体の課題を俯瞰する。
+• 班別/機構別: ロボットの各パートごとの進捗を確認する。
+• メンバー別: 個人ごとのタスク負担を可視化する。
+• レスポンシブ対応: PCの広い画面ではグリッド表示、スマホではリスト表示に最適化されている。
+使用技術
+• Frontend: React
+• Drag & Drop: @dnd-kit/core, @dnd-kit/sortable
+• Styling: Standard CSS (Modern CSS Variables)
+インストールと実行
