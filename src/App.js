@@ -118,25 +118,49 @@ function App() {
   };
   const appMoveMemberTask = (activeId, overId) => {
     setMembersTasks(prev => {
-      const members = Object.keys(prev);
-      let source = null, target = null;
-      for (const m of members) {
-        if (prev[m].some(t => t.id === activeId)) source = m;
-        if (prev[m].some(t => t.id === overId)) target = m;
+      try {
+        const members = Object.keys(prev);
+        let source = null, target = null;
+        for (const m of members) {
+          if (Array.isArray(prev[m]) && prev[m].some(t => t.id === activeId)) source = m;
+          if (Array.isArray(prev[m]) && prev[m].some(t => t.id === overId)) target = m;
+        }
+        // if target not found, do nothing
+        if (!source || !target) {
+          console.warn('moveMemberTask: source or target not found', { activeId, overId, members });
+          return prev;
+        }
+
+        const sourceList = [...prev[source]];
+        const targetList = [...prev[target]];
+
+        const movingIndex = sourceList.findIndex(t => t.id === activeId);
+        if (movingIndex === -1) {
+          console.warn('moveMemberTask: movingIndex -1', { activeId, source });
+          return prev;
+        }
+        const [moving] = sourceList.splice(movingIndex, 1);
+
+        // determine insertion index in target
+        let insertIndex = targetList.findIndex(t => t.id === overId);
+        if (insertIndex === -1) insertIndex = targetList.length;
+
+        // if moving within same member, adjust for removal
+        if (source === target) {
+          // when removing earlier index, the target list is the sourceList after splice
+          const newList = [...sourceList];
+          newList.splice(insertIndex, 0, moving);
+          return { ...prev, [source]: newList };
+        }
+
+        // moving across members
+        const newTarget = [...targetList];
+        newTarget.splice(insertIndex, 0, moving);
+        return { ...prev, [source]: sourceList, [target]: newTarget };
+      } catch (e) {
+        console.error('appMoveMemberTask error', e);
+        return prev;
       }
-      if (!source || !target) return prev;
-      const sourceList = [...prev[source]];
-      const targetList = [...prev[target]];
-      const movingIndex = sourceList.findIndex(t => t.id === activeId);
-      const [moving] = sourceList.splice(movingIndex, 1);
-      const insertIndex = targetList.findIndex(t => t.id === overId);
-      const idx = insertIndex === -1 ? targetList.length : insertIndex;
-      if (source === target) {
-        targetList.splice(idx, 0, moving);
-        return { ...prev, [source]: targetList };
-      }
-      targetList.splice(idx, 0, moving);
-      return { ...prev, [source]: sourceList, [target]: targetList };
     });
   };
 
