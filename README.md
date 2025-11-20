@@ -86,7 +86,7 @@
     堅苦しさを排除するため、ユニークなGIFアニメーションを差し込んでいる。ネットミームをオマージュしたタイトルなど、部活の雰囲気を保ちつつ、メンバーが拒否感なく「楽しくタスクを消化できる」空気感を作った。
 
 <p align="center">
-  <img width="200" alt="Fun Element" src="https://github.com/user-attachments/assets/5d566f77-f8a3-4d4e-bbd5-e5dc0247e3e8" />
+  <img width="200" alt="Fun Element" src="https://github.com/user-attachments/assets/e138bb56-67d6-4ca2-afd7-899cc15aff1f" />
 </p>
 
 ---
