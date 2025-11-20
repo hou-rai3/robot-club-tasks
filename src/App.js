@@ -96,7 +96,11 @@ function App() {
     setMembersTasks(prev => ({ ...prev, [member]: [...(prev[member] || []), task] }));
   };
   const appToggleMember = (member, id) => {
-    setMembersTasks(prev => ({ ...prev, [member]: prev[member].map(t => t.id === id ? { ...t, completed: !t.completed } : t) }));
+    setMembersTasks(prev => {
+      const list = Array.isArray(prev[member]) ? prev[member] : null;
+      if (!list) return prev;
+      return { ...prev, [member]: list.map(t => t.id === id ? { ...t, completed: !t.completed } : t) };
+    });
   };
   const appMoveMemberTask = (activeId, overId) => {
     setMembersTasks(prev => {
