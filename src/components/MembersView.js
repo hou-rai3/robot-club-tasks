@@ -51,7 +51,11 @@ function SortableTaskItem({ task, onToggleComplete, memberName, onSelectIssue })
 }
 
 // メンバー個人のタスクを管理するメインコンポーネント
+<<<<<<< HEAD
 function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue, onDeleteTask }) {
+=======
+function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue }) {
+>>>>>>> fccebd9b03845be3d8765c45b33be3e1c5cf102d
   const initialMembers = ['ベーコン', '丸', '出山', 'トミー', '正田', 'なりなり', 'アサーダ', 'ジャガー', 'だいふく'];
   // Merge propTasks over sensible defaults so each member has an array (avoids undefined and keeps keys stable)
   const defaultMap = initialMembers.reduce((acc, member) => {
@@ -113,7 +117,28 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
             const incompleteTasks = memberTasks.filter(t => !t.completed);
             const completedTasks = memberTasks.filter(t => t.completed);
             return (
+<<<<<<< HEAD
               <MemberColumn key={member} member={member} memberTasks={memberTasks} incompleteTasks={incompleteTasks} completedTasks={completedTasks} onToggleComplete={handleToggleComplete} onSelectIssue={onSelectIssue} onDeleteTask={onDeleteTask} />
+=======
+              <div key={member} id={`col-${member}`} className="member-column">
+                <h3>{member}</h3>
+                <SortableContext
+                  items={incompleteTasks.map(t => t.id)}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {incompleteTasks.map(task => (
+                    <SortableTaskItem key={task.id} task={task} onToggleComplete={handleToggleComplete} memberName={member} onSelectIssue={onSelectIssue} />
+                  ))}
+                </SortableContext>
+                {/* 完了タスクは下に表示 */}
+                {completedTasks.map(task => (
+                  <div key={task.id} className="member-task-item completed-task">
+                    <input id={`chk-${member}-${task.id}`} type="checkbox" checked={task.completed} onChange={() => handleToggleComplete(member, task.id)} />
+                    <span className="member-task-content" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: member })}>{task.content}</span>
+                  </div>
+                ))}
+              </div>
+>>>>>>> fccebd9b03845be3d8765c45b33be3e1c5cf102d
             );
           })}
         </div>

@@ -275,8 +275,12 @@ function App() {
             tasks={membersTasks}
             onAddTask={appAddMemberTask}
             onToggleComplete={appToggleMember}
+<<<<<<< HEAD
               onMoveTask={appMoveMemberTask}
               onDeleteTask={appDeleteMemberTask}
+=======
+            onMoveTask={appMoveMemberTask}
+>>>>>>> fccebd9b03845be3d8765c45b33be3e1c5cf102d
             onSelectIssue={handleSelectIssue}
           />
         );
