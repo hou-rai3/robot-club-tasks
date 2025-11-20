@@ -115,6 +115,13 @@ function App() {
     });
   };
 
+  const appDeleteGroupTask = (group, id) => {
+    setGroupTasks(prev => {
+      const list = Array.isArray(prev[group]) ? prev[group].filter(t => t.id !== id) : [];
+      return { ...prev, [group]: list };
+    });
+  };
+
   const appAddMemberTask = (member, task) => {
     setMembersTasks(prev => ({ ...prev, [member]: [...(prev[member] || []), task] }));
   };
@@ -275,7 +282,8 @@ function App() {
             onAddTask={appAddGroupTask}
             onToggleComplete={appToggleGroup}
             onMoveTask={appMoveGroupTask}
-            onSelectIssue={handleSelectIssue}
+              onSelectIssue={handleSelectIssue}
+              onDeleteTask={appDeleteGroupTask}
           />
         );
       case 'members':

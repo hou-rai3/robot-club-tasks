@@ -33,7 +33,7 @@ function SortableTaskItem({ task, onToggleComplete }) {
   );
 }
 
-function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue }) {
+function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue, onDeleteTask }) {
   const groups = ['機械班', '制御班', '回路班'];
   const sensors = useSensors(useSensor(PointerSensor));
   const [currentOverId, setCurrentOverId] = useState(null);
@@ -94,7 +94,7 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
             const incomplete = groupTasks.filter(t => !t.completed);
             const completed = groupTasks.filter(t => t.completed);
             return (
-              <GroupColumn key={group} group={group} tasks={groupTasks} incomplete={incomplete} completed={completed} viewMode={viewMode} onToggleComplete={handleToggleComplete} onSelectIssue={onSelectIssue} />
+              <GroupColumn key={group} group={group} tasks={groupTasks} incomplete={incomplete} completed={completed} viewMode={viewMode} onToggleComplete={handleToggleComplete} onSelectIssue={onSelectIssue} onDeleteTask={onDeleteTask} />
             );
           })}
         </div>
@@ -103,7 +103,7 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
   );
 }
 
-function GroupColumn({ group, tasks = [], incomplete = [], completed = [], viewMode = 'active', onToggleComplete, onSelectIssue }) {
+function GroupColumn({ group, tasks = [], incomplete = [], completed = [], viewMode = 'active', onToggleComplete, onSelectIssue, onDeleteTask }) {
   const { setNodeRef } = useDroppable({ id: `col-${group}` });
 
   return (
@@ -112,10 +112,13 @@ function GroupColumn({ group, tasks = [], incomplete = [], completed = [], viewM
       {viewMode === 'active' && (
         <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
           {tasks.map(task => (
-            <div key={task.id} style={{ cursor: 'pointer' }} onClick={() => { if (!onSelectIssue) return; onSelectIssue({ issue: task, source: 'group', group }); }}>
-              <SortableTaskItem task={task} onToggleComplete={onToggleComplete} />
-            </div>
-          ))}
+              <div key={task.id} style={{ cursor: 'pointer', display: 'flex', alignItems: 'center' }}>
+                <div style={{ flex: 1 }} onClick={() => { if (!onSelectIssue) return; onSelectIssue({ issue: task, source: 'group', group }); }}>
+                  <SortableTaskItem task={task} onToggleComplete={onToggleComplete} />
+                </div>
+                {onDeleteTask && <button className="member-task-delete" onClick={(e) => { e.stopPropagation(); onDeleteTask(group, task.id); }}>削除</button>}
+              </div>
+            ))}
         </SortableContext>
       )}
 
