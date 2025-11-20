@@ -17,7 +17,7 @@
 1. 直感的な課題管理 (Drag & Drop)
 
 dnd-kit を採用し、付箋を貼り替えるような感覚でタスクの状態（未着手〜完了）を管理できる。
-<img width="1288" height="719" alt="image" src="https://github.com/user-attachments/assets/ec72f8e4-9198-4ab8-bf8e-54624ddaf93c" />
+<img width="1007" height="387" alt="image" src="https://github.com/user-attachments/assets/16852ecb-56c5-4aa7-85ea-5cf990ead3fe" />
 
 2. マルチビューによる視点の切り替え
 
