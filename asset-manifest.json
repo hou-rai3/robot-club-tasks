@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/robot-club-tasks/static/css/main.84a5a44c.css",
-    "main.js": "/robot-club-tasks/static/js/main.770307cc.js",
+    "main.css": "/robot-club-tasks/static/css/main.6caaaaad.css",
+    "main.js": "/robot-club-tasks/static/js/main.9370b493.js",
     "static/js/635.8375b5a4.chunk.js": "/robot-club-tasks/static/js/635.8375b5a4.chunk.js",
     "static/js/453.b4af3048.chunk.js": "/robot-club-tasks/static/js/453.b4af3048.chunk.js",
     "static/media/AqVpIU.gif": "/robot-club-tasks/static/media/AqVpIU.376243049e88f4d82fdd.gif",
     "index.html": "/robot-club-tasks/index.html",
-    "main.84a5a44c.css.map": "/robot-club-tasks/static/css/main.84a5a44c.css.map",
-    "main.770307cc.js.map": "/robot-club-tasks/static/js/main.770307cc.js.map",
+    "main.6caaaaad.css.map": "/robot-club-tasks/static/css/main.6caaaaad.css.map",
+    "main.9370b493.js.map": "/robot-club-tasks/static/js/main.9370b493.js.map",
     "635.8375b5a4.chunk.js.map": "/robot-club-tasks/static/js/635.8375b5a4.chunk.js.map",
     "453.b4af3048.chunk.js.map": "/robot-club-tasks/static/js/453.b4af3048.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.84a5a44c.css",
-    "static/js/main.770307cc.js"
+    "static/css/main.6caaaaad.css",
+    "static/js/main.9370b493.js"
   ]
 }
