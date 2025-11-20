@@ -388,6 +388,25 @@ input:focus, textarea:focus {
 }
 .member-task-delete:hover { color: var(--primary); }
 
+/* task main area and drag-handle */
+.member-task-main {
+  flex: 1 1 auto;
+  padding: 12px 8px;
+  cursor: pointer;
+  color: var(--text-main);
+}
+.member-task-item .drag-handle {
+  flex: 0 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border-radius: 4px;
+  color: var(--text-muted);
+  cursor: grab;
+}
+.member-task-item .drag-handle:active { cursor: grabbing; }
+
 .issue-detail-card {
   background: var(--surface);
   padding: 30px;

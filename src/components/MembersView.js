@@ -15,7 +15,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 
 // 個々のタスクアイテムを描画するコンポーネント
-function SortableTaskItem({ task, onToggleComplete, memberName, onSelectIssue }) {
+function SortableTaskItem({ task, onToggleComplete, memberName, onSelectIssue, onDeleteTask }) {
   const {
     attributes,
     listeners,
@@ -33,19 +33,13 @@ function SortableTaskItem({ task, onToggleComplete, memberName, onSelectIssue })
     <div
       ref={setNodeRef}
       style={style}
-      {...attributes}
-      {...listeners}
       className={`member-task-item ${task.completed ? 'completed-task' : ''}`}
     >
-      <input
-        id={`chk-${memberName}-${task.id}`}
-        type="checkbox"
-        checked={task.completed}
-        onChange={() => onToggleComplete(memberName, task.id)}
-      />
-      <span className="member-task-content" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: memberName })}>
-        {task.content}
-      </span>
+      <div className="drag-handle" {...attributes} {...listeners} aria-label="drag-handle">≡</div>
+      <div className="member-task-main" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: memberName })}>
+        <span>{task.content}</span>
+      </div>
+      <button className="member-task-delete" onClick={(e) => { e.stopPropagation(); onDeleteTask && onDeleteTask(memberName, task.id); }} aria-label={`delete-${task.id}`}>削除</button>
     </div>
   );
 }
@@ -143,22 +137,13 @@ function MemberColumn({ member, memberTasks, incompleteTasks, completedTasks, on
     <div ref={setNodeRef} id={`col-${member}`} className="member-column">
       <h3>{member}</h3>
       <SortableContext
-        items={incompleteTasks.map(t => t.id)}
+        items={memberTasks.map(t => t.id)}
         strategy={verticalListSortingStrategy}
       >
-        {incompleteTasks.map(task => (
-          <div key={task.id}><SortableTaskItem task={task} onToggleComplete={onToggleComplete} memberName={member} onSelectIssue={onSelectIssue} />{onDeleteTask && <button className="member-task-delete" onClick={() => onDeleteTask(member, task.id)}>✕</button>}</div>
+        {memberTasks.map(task => (
+          <SortableTaskItem key={task.id} task={task} onToggleComplete={onToggleComplete} memberName={member} onSelectIssue={onSelectIssue} onDeleteTask={onDeleteTask} />
         ))}
       </SortableContext>
-      {/* 完了タスクは下に表示 */}
-      {completedTasks.map(task => (
-        <div key={task.id} className="member-task-item completed-task">
-          <input id={`chk-${member}-${task.id}`} type="checkbox" checked={task.completed} onChange={() => onToggleComplete(member, task.id)} />
-          <span className="member-task-content" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: member })}>{task.content}</span>
-          {onDeleteTask && <button className="member-task-delete" onClick={() => onDeleteTask(member, task.id)}>✕</button>}
-        </div>
-      ))}
-      {memberTasks.length === 0 && <div className="member-empty">(空)</div>}
     </div>
   );
 }
