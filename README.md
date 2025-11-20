@@ -1,5 +1,6 @@
 # 連中に反省を促すアプリ
-**大阪公大高専 ろぼっと倶楽部 活動管理・課題共有プラットフォーム**
+**反省点実行補助タスク管理アプリ**
+[こちら](https://hou-rai3.github.io/robot-club-tasks/)使用できる。
 
 [![Demo](https://img.shields.io/badge/Demo-Live%20App-crimson?style=for-the-badge&logo=github)](https://hou-rai3.github.io/robot-club-tasks/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://opensource.org/licenses/MIT)
@@ -11,8 +12,6 @@
 
 ## 概要
 私が所属している「大阪公大高専 ろぼっと倶楽部」の活動における「反省」と「課題」を効率的に管理し、次回の活動へ確実に繋げるためのWebアプリケーションである。
-
-部活動特有のワークフローに特化しており、**[こちら](https://hou-rai3.github.io/robot-club-tasks/)** から実際に動作を確認できる。
 
 ---
 
