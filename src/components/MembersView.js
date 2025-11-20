@@ -37,11 +37,12 @@ function SortableTaskItem({ task, onToggleComplete, memberName }) {
       className={`member-task-item ${task.completed ? 'completed-task' : ''}`}
     >
       <input
+        id={`chk-${memberName}-${task.id}`}
         type="checkbox"
         checked={task.completed}
         onChange={() => onToggleComplete(memberName, task.id)}
       />
-      <span>{task.content}</span>
+      <label htmlFor={`chk-${memberName}-${task.id}`}><span>{task.content}</span></label>
     </div>
   );
 }
@@ -49,13 +50,12 @@ function SortableTaskItem({ task, onToggleComplete, memberName }) {
 // メンバー個人のタスクを管理するメインコンポーネント
 function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMoveTask }) {
   const initialMembers = ['ベーコン', '丸', '出山', 'トミー', '正田', 'なりなり', 'アサーダ', 'ジャガー', 'だいふく'];
-  const tasks = Object.keys(propTasks).length ? propTasks : initialMembers.reduce((acc, member) => {
-    acc[member] = [
-      { id: `${member}-1`, content: '設計レビュー', completed: true, member },
-      { id: `${member}-2`, content: '部品Aのテスト', completed: false, member },
-    ];
+  // Merge propTasks over sensible defaults so each member has an array (avoids undefined and keeps keys stable)
+  const defaultMap = initialMembers.reduce((acc, member) => {
+    acc[member] = [];
     return acc;
   }, {});
+  const tasks = { ...defaultMap, ...propTasks };
   const [newTaskText, setNewTaskText] = useState('');
   const [selectedMember, setSelectedMember] = useState(initialMembers[0]);
   const sensors = useSensors(useSensor(PointerSensor));
@@ -123,8 +123,8 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
                 {/* 完了タスクは下に表示 */}
                 {completedTasks.map(task => (
                   <div key={task.id} className="member-task-item completed-task">
-                    <input type="checkbox" checked={true} onChange={() => handleToggleComplete(member, task.id)} />
-                    <span>{task.content}</span>
+                    <input id={`chk-${member}-${task.id}`} type="checkbox" checked={task.completed} onChange={() => handleToggleComplete(member, task.id)} />
+                    <label htmlFor={`chk-${member}-${task.id}`}><span>{task.content}</span></label>
                   </div>
                 ))}
               </div>
