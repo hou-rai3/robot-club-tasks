@@ -372,3 +372,7 @@ input:focus, textarea:focus {
   .app, .App { padding: 16px; }
   .title-row { flex-direction: column; }
 }
+
+@media (max-width: 900px) {
+  .member-column { grid-template-columns: 1fr; }
+}
