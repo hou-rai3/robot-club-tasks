@@ -5,6 +5,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  useDroppable,
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -14,7 +15,7 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 
 // 個々のタスクアイテムを描画するコンポーネント
-function SortableTaskItem({ task, onToggleComplete, memberName }) {
+function SortableTaskItem({ task, onToggleComplete, memberName, onSelectIssue }) {
   const {
     attributes,
     listeners,
@@ -42,13 +43,15 @@ function SortableTaskItem({ task, onToggleComplete, memberName }) {
         checked={task.completed}
         onChange={() => onToggleComplete(memberName, task.id)}
       />
-      <label htmlFor={`chk-${memberName}-${task.id}`}><span>{task.content}</span></label>
+      <span className="member-task-content" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: memberName })}>
+        {task.content}
+      </span>
     </div>
   );
 }
 
 // メンバー個人のタスクを管理するメインコンポーネント
-function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMoveTask }) {
+function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue, onDeleteTask }) {
   const initialMembers = ['ベーコン', '丸', '出山', 'トミー', '正田', 'なりなり', 'アサーダ', 'ジャガー', 'だいふく'];
   // Merge propTasks over sensible defaults so each member has an array (avoids undefined and keeps keys stable)
   const defaultMap = initialMembers.reduce((acc, member) => {
@@ -110,28 +113,38 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
             const incompleteTasks = memberTasks.filter(t => !t.completed);
             const completedTasks = memberTasks.filter(t => t.completed);
             return (
-              <div key={member} className="member-column">
-                <h3>{member}</h3>
-                <SortableContext
-                  items={incompleteTasks.map(t => t.id)}
-                  strategy={verticalListSortingStrategy}
-                >
-                  {incompleteTasks.map(task => (
-                    <SortableTaskItem key={task.id} task={task} onToggleComplete={handleToggleComplete} memberName={member} />
-                  ))}
-                </SortableContext>
-                {/* 完了タスクは下に表示 */}
-                {completedTasks.map(task => (
-                  <div key={task.id} className="member-task-item completed-task">
-                    <input id={`chk-${member}-${task.id}`} type="checkbox" checked={task.completed} onChange={() => handleToggleComplete(member, task.id)} />
-                    <label htmlFor={`chk-${member}-${task.id}`}><span>{task.content}</span></label>
-                  </div>
-                ))}
-              </div>
+              <MemberColumn key={member} member={member} memberTasks={memberTasks} incompleteTasks={incompleteTasks} completedTasks={completedTasks} onToggleComplete={handleToggleComplete} onSelectIssue={onSelectIssue} onDeleteTask={onDeleteTask} />
             );
           })}
         </div>
       </DndContext>
+    </div>
+  );
+}
+
+function MemberColumn({ member, memberTasks, incompleteTasks, completedTasks, onToggleComplete, onSelectIssue, onDeleteTask }) {
+  const { setNodeRef } = useDroppable({ id: `col-${member}` });
+
+  return (
+    <div ref={setNodeRef} id={`col-${member}`} className="member-column">
+      <h3>{member}</h3>
+      <SortableContext
+        items={incompleteTasks.map(t => t.id)}
+        strategy={verticalListSortingStrategy}
+      >
+        {incompleteTasks.map(task => (
+          <div key={task.id}><SortableTaskItem task={task} onToggleComplete={onToggleComplete} memberName={member} onSelectIssue={onSelectIssue} />{onDeleteTask && <button className="member-task-delete" onClick={() => onDeleteTask(member, task.id)}>✕</button>}</div>
+        ))}
+      </SortableContext>
+      {/* 完了タスクは下に表示 */}
+      {completedTasks.map(task => (
+        <div key={task.id} className="member-task-item completed-task">
+          <input id={`chk-${member}-${task.id}`} type="checkbox" checked={task.completed} onChange={() => onToggleComplete(member, task.id)} />
+          <span className="member-task-content" onClick={() => onSelectIssue && onSelectIssue({ issue: task, source: 'members', group: member })}>{task.content}</span>
+          {onDeleteTask && <button className="member-task-delete" onClick={() => onDeleteTask(member, task.id)}>✕</button>}
+        </div>
+      ))}
+      {memberTasks.length === 0 && <div className="member-empty">(空)</div>}
     </div>
   );
 }

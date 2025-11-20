@@ -123,7 +123,12 @@ function App() {
         let source = null, target = null;
         for (const m of members) {
           if (Array.isArray(prev[m]) && prev[m].some(t => t.id === activeId)) source = m;
-          if (Array.isArray(prev[m]) && prev[m].some(t => t.id === overId)) target = m;
+          if (overId && String(overId).startsWith('col-')) {
+            // overId is a column id like 'col-<member>' -> target will be that member
+            target = String(overId).slice(4);
+          } else if (Array.isArray(prev[m]) && prev[m].some(t => t.id === overId)) {
+            target = m;
+          }
         }
         // if target not found, do nothing
         if (!source || !target) {
@@ -142,8 +147,14 @@ function App() {
         const [moving] = sourceList.splice(movingIndex, 1);
 
         // determine insertion index in target
-        let insertIndex = targetList.findIndex(t => t.id === overId);
-        if (insertIndex === -1) insertIndex = targetList.length;
+        let insertIndex = -1;
+        if (overId && String(overId).startsWith('col-')) {
+          // dropping into empty column or onto column container -> append
+          insertIndex = targetList.length;
+        } else {
+          insertIndex = targetList.findIndex(t => t.id === overId);
+          if (insertIndex === -1) insertIndex = targetList.length;
+        }
 
         // if moving within same member, adjust for removal
         if (source === target) {
@@ -161,6 +172,13 @@ function App() {
         console.error('appMoveMemberTask error', e);
         return prev;
       }
+    });
+  };
+
+  const appDeleteMemberTask = (member, id) => {
+    setMembersTasks(prev => {
+      const list = Array.isArray(prev[member]) ? prev[member].filter(t => t.id !== id) : [];
+      return { ...prev, [member]: list };
     });
   };
 
@@ -257,7 +275,9 @@ function App() {
             tasks={membersTasks}
             onAddTask={appAddMemberTask}
             onToggleComplete={appToggleMember}
-            onMoveTask={appMoveMemberTask}
+              onMoveTask={appMoveMemberTask}
+              onDeleteTask={appDeleteMemberTask}
+            onSelectIssue={handleSelectIssue}
           />
         );
       case 'detail':

@@ -378,6 +378,16 @@ input:focus, textarea:focus {
   height: 18px;
 }
 
+.member-task-delete {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.member-task-delete:hover { color: var(--primary); }
+
 .issue-detail-card {
   background: var(--surface);
   padding: 30px;
