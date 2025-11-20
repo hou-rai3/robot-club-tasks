@@ -56,6 +56,7 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
   const [newTaskText, setNewTaskText] = useState('');
   const [selectedMember, setSelectedMember] = useState(initialMembers[0]);
   const sensors = useSensors(useSensor(PointerSensor));
+  const [currentOverId, setCurrentOverId] = useState(null);
 
   const handleAddTask = (e) => {
     e.preventDefault();
@@ -78,16 +79,25 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
     } catch (e) {}
 
     if (!active) return;
-    // resolve over id: prefer over.id, fallback to sortable data if present
+    // resolve over id: prefer over.id, fallback to sortable data if present, else use recent over recorded by onDragOver
     let resolvedOverId = null;
     if (over && over.id) resolvedOverId = over.id;
     else if (over && over.data && over.data.current && over.data.current.sortable) {
       resolvedOverId = over.data.current.sortable.id;
+    } else if (currentOverId) {
+      resolvedOverId = currentOverId;
     }
 
     if (resolvedOverId && active.id !== resolvedOverId) {
       if (onMoveTask) onMoveTask(active.id, resolvedOverId);
     }
+    // clear
+    setCurrentOverId(null);
+  };
+
+  const handleDragOver = (event) => {
+    const { over } = event;
+    setCurrentOverId(over?.id || null);
   };
 
   // members view is controlled by props (onAddTask/onToggleComplete/onMoveTask)
@@ -114,6 +124,7 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
         sensors={sensors}
         collisionDetection={closestCenter}
         onDragEnd={handleDragEnd}
+        onDragOver={handleDragOver}
       >
         <div className="members-task-container">
           {initialMembers.map(member => {
