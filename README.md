@@ -31,6 +31,13 @@ dnd-kit を採用し、付箋を貼り替えるような感覚でタスクの状
 
 <img width="1061" height="411" alt="image" src="https://github.com/user-attachments/assets/095aed61-7c0b-450d-b36a-7220a2497297" />
 
+4. タスクの詳細
+
+タスクをクリックすることで、具体的な内容を記述・確認することができる。記入後もいつでも編集が可能である。
+
+<img width="901" height="441" alt="image" src="https://github.com/user-attachments/assets/67c38ddf-5893-4b09-9075-5064500c6f50" />
+
+
 # こだわり・工夫した点
 
 ・ユーザー体験 (UX) への配慮
