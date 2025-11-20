@@ -61,7 +61,7 @@ Styling: Standard CSS (Modern CSS Variables, CSS Grid)
 
 Hosting: GitHub Pages
 
-# 開発期間 (必須)
+# 開発期間
 
 開発期間: 2025.10.23 ~ 2025.11.20
 取り組み時間: 約 23 時間（設計・実装・検証・デプロイ含む）
