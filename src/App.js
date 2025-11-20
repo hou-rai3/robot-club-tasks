@@ -258,6 +258,7 @@ function App() {
             onAddTask={appAddMemberTask}
             onToggleComplete={appToggleMember}
             onMoveTask={appMoveMemberTask}
+            onSelectIssue={handleSelectIssue}
           />
         );
       case 'detail':
