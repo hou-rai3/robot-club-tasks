@@ -87,21 +87,30 @@ function App() {
       const groups = Object.keys(prev);
       let source = null, target = null;
       for (const g of groups) {
-        if (prev[g].some(t => t.id === activeId)) source = g;
-        if (prev[g].some(t => t.id === overId)) target = g;
+        if (Array.isArray(prev[g]) && prev[g].some(t => t.id === activeId)) source = g;
+        if (overId && String(overId).startsWith('col-')) {
+          target = String(overId).slice(4);
+        } else if (Array.isArray(prev[g]) && prev[g].some(t => t.id === overId)) target = g;
       }
       if (!source || !target) return prev;
       const sourceList = [...prev[source]];
       const targetList = [...prev[target]];
       const movingIndex = sourceList.findIndex(t => t.id === activeId);
+      if (movingIndex === -1) return prev;
       const [moving] = sourceList.splice(movingIndex, 1);
-      const insertIndex = targetList.findIndex(t => t.id === overId);
-      const idx = insertIndex === -1 ? targetList.length : insertIndex;
-      if (source === target) {
-        targetList.splice(idx, 0, moving);
-        return { ...prev, [source]: targetList };
+      let insertIndex = -1;
+      if (overId && String(overId).startsWith('col-')) {
+        insertIndex = targetList.length;
+      } else {
+        insertIndex = targetList.findIndex(t => t.id === overId);
+        if (insertIndex === -1) insertIndex = targetList.length;
       }
-      targetList.splice(idx, 0, { ...moving, member: target });
+      if (source === target) {
+        const newList = [...sourceList];
+        newList.splice(insertIndex, 0, moving);
+        return { ...prev, [source]: newList };
+      }
+      targetList.splice(insertIndex, 0, { ...moving, member: target });
       return { ...prev, [source]: sourceList, [target]: targetList };
     });
   };

@@ -5,6 +5,7 @@ import {
   PointerSensor,
   useSensor,
   useSensors,
+  useDroppable,
 } from '@dnd-kit/core';
 import {
   SortableContext,
@@ -35,6 +36,7 @@ function SortableTaskItem({ task, onToggleComplete }) {
 function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSelectIssue }) {
   const groups = ['機械班', '制御班', '回路班'];
   const sensors = useSensors(useSensor(PointerSensor));
+  const [currentOverId, setCurrentOverId] = useState(null);
 
   const [newTaskText, setNewTaskText] = useState('');
   const [selectedGroup, setSelectedGroup] = useState(groups[0]);
@@ -54,10 +56,19 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
-    if (over && active.id !== over.id) {
-      if (onMoveTask) onMoveTask(active.id, over.id);
+    if (!active) return;
+    let resolvedOverId = null;
+    if (over && over.id) resolvedOverId = over.id;
+    else if (over && over.data && over.data.current && over.data.current.sortable) resolvedOverId = over.data.current.sortable.id;
+    else if (currentOverId) resolvedOverId = currentOverId;
+
+    if (resolvedOverId && active.id !== resolvedOverId) {
+      if (onMoveTask) onMoveTask(active.id, resolvedOverId);
     }
+    setCurrentOverId(null);
   };
+
+  const handleDragOver = (event) => { setCurrentOverId(event.over?.id || null); };
 
   return (
     <div className="view-container">
@@ -76,47 +87,53 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
         </form>
       </div>
 
-      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <DndContext sensors={sensors} collisionDetection={closestCenter} onDragEnd={handleDragEnd} onDragOver={handleDragOver}>
         <div className="members-task-container">
           {groups.map(group => {
-            const incomplete = (tasks[group] || []).filter(t => !t.completed);
-            const completed = (tasks[group] || []).filter(t => t.completed);
+            const groupTasks = Array.isArray(tasks[group]) ? tasks[group] : [];
+            const incomplete = groupTasks.filter(t => !t.completed);
+            const completed = groupTasks.filter(t => t.completed);
             return (
-              <div key={group} className="member-column">
-                <h3>{group}</h3>
-                {viewMode === 'active' && (
-                  <SortableContext items={incomplete.map(t => t.id)} strategy={verticalListSortingStrategy}>
-                    {incomplete.map(task => (
-                      <div key={task.id} style={{ cursor: 'pointer' }} onClick={() => {
-                        if (!onSelectIssue) return;
-                        onSelectIssue({ issue: task, source: 'group', group });
-                      }}>
-                        <SortableTaskItem task={task} onToggleComplete={handleToggleComplete} />
-                      </div>
-                    ))}
-                  </SortableContext>
-                )}
-
-                {viewMode === 'completed' && (
-                  <div>
-                    {completed.map(task => (
-                      <div key={task.id} className="member-task-item completed-task" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                          <input type="checkbox" checked={true} onChange={() => handleToggleComplete(group, task.id)} />
-                          <span>{task.what}</span>
-                        </div>
-                        <div>
-                          <button onClick={() => handleToggleComplete(group, task.id)} className="add-btn">再開</button>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+              <GroupColumn key={group} group={group} tasks={groupTasks} incomplete={incomplete} completed={completed} viewMode={viewMode} onToggleComplete={handleToggleComplete} onSelectIssue={onSelectIssue} />
             );
           })}
         </div>
       </DndContext>
+    </div>
+  );
+}
+
+function GroupColumn({ group, tasks = [], incomplete = [], completed = [], viewMode = 'active', onToggleComplete, onSelectIssue }) {
+  const { setNodeRef } = useDroppable({ id: `col-${group}` });
+
+  return (
+    <div ref={setNodeRef} id={`col-${group}`} className="member-column">
+      <h3>{group}</h3>
+      {viewMode === 'active' && (
+        <SortableContext items={tasks.map(t => t.id)} strategy={verticalListSortingStrategy}>
+          {tasks.map(task => (
+            <div key={task.id} style={{ cursor: 'pointer' }} onClick={() => { if (!onSelectIssue) return; onSelectIssue({ issue: task, source: 'group', group }); }}>
+              <SortableTaskItem task={task} onToggleComplete={onToggleComplete} />
+            </div>
+          ))}
+        </SortableContext>
+      )}
+
+      {viewMode === 'completed' && (
+        <div>
+          {completed.map(task => (
+            <div key={task.id} className="member-task-item completed-task" style={{ cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                <input type="checkbox" checked={true} onChange={() => onToggleComplete(group, task.id)} />
+                <span>{task.what}</span>
+              </div>
+              <div>
+                <button onClick={() => onToggleComplete(group, task.id)} className="add-btn">再開</button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
