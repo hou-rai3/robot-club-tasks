@@ -5,7 +5,9 @@
 [![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://opensource.org/licenses/MIT)
 [![React](https://img.shields.io/badge/Built%20With-React-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
 
-<img width="100%" alt="App Top" src="https://github.com/user-attachments/assets/a5d42670-064f-4186-9d03-69d1aa8ec5ff" />
+<p align="center">
+  <img width="100%" alt="App Top" src="https://github.com/user-attachments/assets/a5d42670-064f-4186-9d03-69d1aa8ec5ff" />
+</p>
 
 ## 概要
 私が所属している「大阪公大高専 ろぼっと倶楽部」の活動における「反省」と「課題」を効率的に管理し、次回の活動へ確実に繋げるためのWebアプリケーションである。
@@ -35,7 +37,9 @@
 `dnd-kit` を採用し、付箋を貼り替えるような感覚でタスクの状態（未着手〜完了）を管理できる。
 ドラッグアンドドロップによるステータスの変更はもちろん、他班や他のメンバーへのタスク移動も直感的に実行可能である。
 
-<img width="100%" alt="Drag and Drop" src="https://github.com/user-attachments/assets/f3c482e4-5fce-41fd-99f5-93977fc5be36" />
+<p align="center">
+  <img width="100%" alt="Drag and Drop" src="https://github.com/user-attachments/assets/f3c482e4-5fce-41fd-99f5-93977fc5be36" />
+</p>
 
 ### 2. マルチビューによる視点の切り替え
 状況に応じて、最適な粒度でタスクを確認できる。
@@ -43,19 +47,23 @@
 * **班別:** メカ・回路・制御ごとのタスクを深掘り
 * **メンバー別:** 個人の負荷状況を可視化
 
-<img width="100%" alt="Multi View" src="https://github.com/user-attachments/assets/5395e96e-4d00-48e6-bf48-f1f3de2df2a5" />
+<p align="center">
+  <img width="100%" alt="Multi View" src="https://github.com/user-attachments/assets/5395e96e-4d00-48e6-bf48-f1f3de2df2a5" />
+</p>
 
 ### 3. 没入感を高めるUIデザイン
 事務的な管理画面ではなく、かっこいい「ダークグレー × クリムゾンレッド」のデザインを採用した。部活動のモチベーションを高めるUIに仕上げている。
 
-<img width="100%" alt="UI Design" src="https://github.com/user-attachments/assets/095aed61-7c0b-450d-b36a-7220a2497297" />
+<p align="center">
+  <img width="100%" alt="UI Design" src="https://github.com/user-attachments/assets/095aed61-7c0b-450d-b36a-7220a2497297" />
+</p>
 
 ### 4. タスク詳細の管理
 タスクをクリックすることで、具体的な内容を記述・確認可能である。いつでも編集でき、情報のアップデートに対応する。
 
-<img width="300" alt="Task Details" src="https://github.com/user-attachments/assets/6b4967f8-703f-4632-a96a-fb6c5c6ac7f7" />
-
-![無題のビデオ ‐ Clipchampで作成](https://github.com/user-attachments/assets/265d90d9-27fd-46ec-8ce1-07de7d616a1b)
+<p align="center">
+  <img width="300" alt="Task Details" src="https://github.com/user-attachments/assets/6b4967f8-703f-4632-a96a-fb6c5c6ac7f7" />
+</p>
 
 ---
 
@@ -77,7 +85,9 @@
 * **ユーモアの導入:**
     堅苦しさを排除するため、ユニークなGIFアニメーションを差し込んでいる。ネットミームをオマージュしたタイトルなど、部活の雰囲気を保ちつつ、メンバーが拒否感なく「楽しくタスクを消化できる」空気感を作った。
 
-<img width="200" alt="Fun Element" src="https://github.com/user-attachments/assets/5d566f77-f8a3-4d4e-bbd5-e5dc0247e3e8" />
+<p align="center">
+  <img width="200" alt="Fun Element" src="https://github.com/user-attachments/assets/5d566f77-f8a3-4d4e-bbd5-e5dc0247e3e8" />
+</p>
 
 ---
 
