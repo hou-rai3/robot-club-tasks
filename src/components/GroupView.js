@@ -39,15 +39,17 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
   const [currentOverId, setCurrentOverId] = useState(null);
 
   const [newTaskText, setNewTaskText] = useState('');
+  const [newTaskWho, setNewTaskWho] = useState('');
   const [selectedGroup, setSelectedGroup] = useState(groups[0]);
   const [viewMode, setViewMode] = useState('active'); // 'active' | 'completed'
 
   const handleAddTask = (e) => {
     e.preventDefault();
     if (!newTaskText) return;
-    const newTask = { id: `${selectedGroup}-${Date.now()}`, what: newTaskText, who: '', when: '', completed: false, member: selectedGroup };
+    const newTask = { id: `${selectedGroup}-${Date.now()}`, what: newTaskText, who: newTaskWho || '', when: '', completed: false, member: selectedGroup };
     if (onAddTask) onAddTask(selectedGroup, newTask);
     setNewTaskText('');
+    setNewTaskWho('');
   };
 
   const handleToggleComplete = (groupName, taskId) => {
@@ -81,8 +83,9 @@ function GroupView({ tasks = {}, onAddTask, onToggleComplete, onMoveTask, onSele
         <select value={selectedGroup} onChange={(e) => setSelectedGroup(e.target.value)}>
           {groups.map(g => <option key={g} value={g}>{g}</option>)}
         </select>
-        <form onSubmit={handleAddTask} style={{ display: 'inline-flex', marginLeft: '10px' }}>
+        <form onSubmit={handleAddTask} style={{ display: 'inline-flex', marginLeft: '10px', gap: '8px', alignItems: 'center' }}>
           <input value={newTaskText} onChange={(e) => setNewTaskText(e.target.value)} placeholder="課題を追加" />
+          <input value={newTaskWho} onChange={(e) => setNewTaskWho(e.target.value)} placeholder="担当を入力" style={{ width: 140 }} />
           <button type="submit" className="add-btn">追加</button>
         </form>
       </div>
