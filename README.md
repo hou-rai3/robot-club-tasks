@@ -1,79 +1,102 @@
 # 連中に反省を促すアプリ
-私が所属している大阪公大高専 ろぼっと倶楽部の活動における「反省」と「課題」を効率的に管理し、次回の活動へ確実に繋げるためのWebアプリケーションである。
-<img width="1030" height="746" alt="image" src="https://github.com/user-attachments/assets/a5d42670-064f-4186-9d03-69d1aa8ec5ff" />
+**大阪公大高専 ろぼっと倶楽部 活動管理・課題共有プラットフォーム**
 
+[![Demo](https://img.shields.io/badge/Demo-Live%20App-crimson?style=for-the-badge&logo=github)](https://hou-rai3.github.io/robot-club-tasks/)
+[![License](https://img.shields.io/badge/License-MIT-blue?style=for-the-badge)](https://opensource.org/licenses/MIT)
+[![React](https://img.shields.io/badge/Built%20With-React-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
 
-# [こちら](https://hou-rai3.github.io/robot-club-tasks/)からご利用できます。
+<img width="100%" alt="App Top" src="https://github.com/user-attachments/assets/a5d42670-064f-4186-9d03-69d1aa8ec5ff" />
 
+## 📖 概要
+私が所属している「大阪公大高専 ろぼっと倶楽部」の活動における「反省」と「課題」を効率的に管理し、次回の活動へ確実に繋げるためのWebアプリケーションです。
 
-# 開発の背景と着想
+部活動特有のワークフローに特化し、**[こちら](https://hou-rai3.github.io/robot-club-tasks/)** から実際に動作を確認できます。
 
-我々の部活では、ロボコンなどの大会後や定期的な活動の節目に必ず「反省会」を実施している。しかし、これまで反省会で挙がった課題や改善案はホワイトボードや個人のメモに留まることが多く、「誰が・いつまでに・やるべきか」が曖昧になり、議論した内容が流れてしまうという深刻な問題があった。
+---
 
-汎用的なToDoアプリでは「部活特有の熱量」や「チームごとの管理」がしっくりこず、定着しなかった経験から、反省会で出た課題を確実に記録し、エンジニアとしての改善サイクルを回すための専用管理ツールが必要であると考え、本アプリを開発した。
+## 💡 開発の背景
 
-# 主な機能とスクリーンショット
+### 課題：議論の流出
+我々の部活では、大会後や節目に必ず「反省会」を実施しています。しかし、そこで挙がった貴重な課題や改善案が：
+* ホワイトボードや個人のメモに留まってしまう
+* 「誰が・いつまでに・やるべきか」が曖昧になる
+* 結果として、議論した内容が流れてしまい、同じ失敗を繰り返す
 
-1. 直感的な課題管理 (Drag & Drop)
+という深刻な問題がありました。
 
-dnd-kit を採用し、付箋を貼り替えるような感覚でタスクの状態（未着手〜完了）を管理できる。
-ドラッグアンドドロップで場所の移動、他班、他人へのタスク移動も簡単に実行可能。
-<img width="1223" height="383" alt="image" src="https://github.com/user-attachments/assets/f3c482e4-5fce-41fd-99f5-93977fc5be36" />
+### 解決策：エンジニアのための専用ツール
+汎用的なToDoアプリでは「部活特有の熱量」や「チームごとの管理」がしっくりこず、定着しませんでした。そこで、**「反省会で出た課題を確実に記録し、エンジニアとしての改善サイクルを回す」** ことに特化した専用ツールを開発しました。
 
-2. マルチビューによる視点の切り替え
+---
 
-「全体一覧」でチームの総意を確認し、「班別」でメカ・回路・制御ごとのタスクを深掘りし、「メンバー別」で個人の負荷状況を可視化する。状況に応じた視点の切り替えが可能。
+## 🚀 主な機能
 
-<img width="1120" height="653" alt="image" src="https://github.com/user-attachments/assets/5395e96e-4d00-48e6-bf48-f1f3de2df2a5" />
+### 1. 直感的な課題管理 (Drag & Drop)
+`dnd-kit` を採用し、付箋を貼り替えるような感覚でタスクの状態（未着手〜完了）を管理できます。
+ドラッグアンドドロップでステータスの変更はもちろん、他班や他のメンバーへのタスク移動も直感的に行えます。
 
-3. 没入感を高めるUIデザイン
+<img width="100%" alt="Drag and Drop" src="https://github.com/user-attachments/assets/f3c482e4-5fce-41fd-99f5-93977fc5be36" />
 
-部活動のモチベーションを高めるため、事務的な管理画面ではなく、かっこいい「ダークグレー × クリムゾンレッド」のデザインを採用した。
+### 2. マルチビューによる視点の切り替え
+状況に応じて、最適な粒度でタスクを確認できます。
+* **全体一覧:** チーム全体の総意と進捗を確認
+* **班別:** メカ・回路・制御ごとのタスクを深掘り
+* **メンバー別:** 個人の負荷状況を可視化
 
-<img width="1061" height="411" alt="image" src="https://github.com/user-attachments/assets/095aed61-7c0b-450d-b36a-7220a2497297" />
+<img width="100%" alt="Multi View" src="https://github.com/user-attachments/assets/5395e96e-4d00-48e6-bf48-f1f3de2df2a5" />
 
-4. タスクの詳細
+### 3. 没入感を高めるUIデザイン
+事務的な管理画面ではなく、かっこいい「ダークグレー × クリムゾンレッド」のデザインを採用。部活動のモチベーションを高めるUIに仕上げています。
 
-タスクをクリックすることで、具体的な内容を記述・確認することができる。記入後もいつでも編集が可能である。
+<img width="100%" alt="UI Design" src="https://github.com/user-attachments/assets/095aed61-7c0b-450d-b36a-7220a2497297" />
 
-<img width="901" height="441" alt="image" src="https://github.com/user-attachments/assets/67c38ddf-5893-4b09-9075-5064500c6f50" />
+### 4. タスク詳細の管理
+タスクをクリックすることで、具体的な内容を記述・確認可能。いつでも編集でき、情報のアップデートに対応します。
 
+<img width="100%" alt="Task Details" src="https://github.com/user-attachments/assets/67c38ddf-5893-4b09-9075-5064500c6f50" />
 
-# こだわり・工夫した点
+---
 
-・ユーザー体験 (UX) への配慮
+## 🎨 こだわり・工夫した点
 
-「反省」をネガティブにしない: デザインをブラックとクリムゾンレッドを使い、かっこよくにすることで、「課題の消化」を「機体のアップグレード」のようにポジティブに捉えられるよう意識した。
+### ユーザー体験 (UX) への配慮
+* **「反省」をポジティブに:**
+    「反省＝ネガティブ」という印象を払拭するため、デザインをスタイリッシュに統一。「課題の消化」をゲームやRPGにおける「機体のアップグレード」のようにポジティブに捉えられるよう意識しました。
+* **情報のスキャン性:**
+    カード型UIとグリッドレイアウト（auto-fit）を採用し、PC画面では横幅いっぱいに情報を展開。一目で多くのタスクを把握できる一覧性を確保しています。
 
-情報のスキャン性: カード型のUIを採用しつつ、PC画面ではグリッドレイアウト（auto-fit）で横幅いっぱいに情報を展開し、一目で多くのタスクを把握できるようにした。
+### 技術的な挑戦
+* **dnd-kit の高度な活用:**
+    単なるリストの並び替えではなく、グリッドレイアウト（`rectSortingStrategy`）上での直感的な操作性を実現するため、Reactコンポーネントの設計とCSSの整合性に注力しました。
+* **シームレスなレスポンシブ:**
+    スマートフォンではリスト表示、PCではグリッド表示へとシームレスに切り替わるよう、CSS GridとMedia Queryを駆使して実装しています。
 
-・技術的な挑戦
+### 遊び心
+* **ユーモアの導入:**
+    堅苦しさを排除するため、ユニークなGIFアニメーションを差し込んでいます。ネットミームをオマージュしたタイトルなど、部活の雰囲気を保ちつつ、メンバーが拒否感なく「楽しくタスクを消化できる」空気感を作りました。
 
-dnd-kit の活用: 一般的なリストの並び替えだけでなく、グリッドレイアウト（rectSortingStrategy）での直感的な操作性を実現するために、Reactコンポーネントの設計とCSSの整合性に注力した。
+![Fun Element](https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08)
 
-・レスポンシブ対応: スマートフォンでの閲覧時はリスト表示、PCではグリッド表示へとシームレスに切り替わるよう、CSS GridとMedia Queryを駆使して実装した。
+---
 
-・遊び心
-堅苦しいものだけでなく、ユニークなGIFを差し込むことで楽しくタスクを消化できる。
+## 🛠 使用技術
 
-![20251120-0038-30 4203059](https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08)
+| Category | Tech Stack |
+| --- | --- |
+| **Frontend** | React |
+| **Library** | @dnd-kit/core, @dnd-kit/sortable |
+| **Styling** | Standard CSS (Modern CSS Variables, CSS Grid) |
+| **Hosting** | GitHub Pages |
 
+---
 
-# 使用技術
+## 📅 開発期間
 
-Frontend: React
+* **期間:** 2025.10.23 ~ 2025.11.20
+* **工数:** 約 23 時間（設計・実装・検証・デプロイ含む）
 
-Drag & Drop: @dnd-kit/core, @dnd-kit/sortable
+---
 
-Styling: Standard CSS (Modern CSS Variables, CSS Grid)
-
-Hosting: GitHub Pages
-
-# 開発期間
-
-開発期間: 2025.10.23 ~ 2025.11.20
-取り組み時間: 約 23 時間（設計・実装・検証・デプロイ含む）
-
-# License
+## 📜 License
 
 This project is licensed under the MIT License.
