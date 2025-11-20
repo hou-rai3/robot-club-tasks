@@ -54,6 +54,7 @@
 タスクをクリックすることで、具体的な内容を記述・確認可能である。いつでも編集でき、情報のアップデートに対応する。
 
 <img width="300" alt="Task Details" src="https://github.com/user-attachments/assets/6b4967f8-703f-4632-a96a-fb6c5c6ac7f7" />
+
 ![無題のビデオ ‐ Clipchampで作成](https://github.com/user-attachments/assets/265d90d9-27fd-46ec-8ce1-07de7d616a1b)
 
 ---
