@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/robot-club-tasks/static/css/main.525b4121.css",
-    "main.js": "/robot-club-tasks/static/js/main.619e13fc.js",
+    "main.js": "/robot-club-tasks/static/js/main.2c224d0b.js",
     "static/js/635.8375b5a4.chunk.js": "/robot-club-tasks/static/js/635.8375b5a4.chunk.js",
     "static/js/453.b4af3048.chunk.js": "/robot-club-tasks/static/js/453.b4af3048.chunk.js",
     "static/media/AqVpIU.gif": "/robot-club-tasks/static/media/AqVpIU.376243049e88f4d82fdd.gif",
     "index.html": "/robot-club-tasks/index.html",
     "main.525b4121.css.map": "/robot-club-tasks/static/css/main.525b4121.css.map",
-    "main.619e13fc.js.map": "/robot-club-tasks/static/js/main.619e13fc.js.map",
+    "main.2c224d0b.js.map": "/robot-club-tasks/static/js/main.2c224d0b.js.map",
     "635.8375b5a4.chunk.js.map": "/robot-club-tasks/static/js/635.8375b5a4.chunk.js.map",
     "453.b4af3048.chunk.js.map": "/robot-club-tasks/static/js/453.b4af3048.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.525b4121.css",
-    "static/js/main.619e13fc.js"
+    "static/js/main.2c224d0b.js"
   ]
 }
