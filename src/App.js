@@ -235,7 +235,7 @@ function App() {
       <header>
         <div className="title-row">
           <img src={logoGif} alt="logo" className="title-gif" />
-          <h1>大阪公大高専 ろぼっと倶楽部 - 連中に反省を促すアプリ</h1>
+          <h1>ろぼっと倶楽部 - 連中に反省を促すアプリ</h1>
         </div>
         <nav>
           <button onClick={() => setActiveTab('overall')} className={activeTab === 'overall' ? 'active' : ''}>反省一覧</button>
