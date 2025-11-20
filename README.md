@@ -69,13 +69,14 @@
     単なるリストの並び替えではなく、グリッドレイアウト上での直感的な操作性を実現するため、Reactコンポーネントの設計とCSSの整合性に注力した。
 * **シームレスなレスポンシブ:**
     スマートフォンではリスト表示、PCではグリッド表示へとシームレスに切り替わるよう、CSS GridとMedia Queryを駆使して実装した。
+<img width="100%" alt="Task Details" src="https://github.com/user-attachments/assets/6b4967f8-703f-4632-a96a-fb6c5c6ac7f7" />
 
-<img width="1179" height="1939" alt="IMG_8200" src="https://github.com/user-attachments/assets/6b4967f8-703f-4632-a96a-fb6c5c6ac7f7" />
 
 ### 遊び心
 * **ユーモアの導入:**
     堅苦しさを排除するため、ユニークなGIFアニメーションを差し込んでいる。ネットミームをオマージュしたタイトルなど、部活の雰囲気を保ちつつ、メンバーが拒否感なく「楽しくタスクを消化できる」空気感を作った。
-<img width="100%" alt="Task Details" src="https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08" />
+
+https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08
 
 ---
 
