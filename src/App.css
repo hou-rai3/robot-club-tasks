@@ -322,10 +322,10 @@ input:focus, textarea:focus {
   border-radius: var(--radius);
   border: 1px solid var(--border);
   min-width: 260px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
   gap: 12px;
-  align-items: start;
+  align-items: stretch;
 }
 
 .member-column h3 {
@@ -334,7 +334,6 @@ input:focus, textarea:focus {
   border-bottom: 1px solid var(--border);
   padding-bottom: 8px;
   margin: 0 0 12px 0;
-  grid-column: 1 / -1; /* title spans both columns */
 }
 
 /* メンバー追加エリアのインライン配置調整 */
@@ -394,5 +393,5 @@ input:focus, textarea:focus {
 }
 
 @media (max-width: 900px) {
-  .member-column { grid-template-columns: 1fr; }
+  .member-column { min-width: 200px; }
 }
