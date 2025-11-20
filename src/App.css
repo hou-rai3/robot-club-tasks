@@ -135,9 +135,9 @@ h2 {
 
 /* React/dnd-kitが生成するラッパーdivへの対策 */
 .task-board > div {
-  display: flex; 
-  align-items: stretch; /* 子要素(カード)をセルの高さ・幅いっぱいに伸ばす */
-  height: 100%;
+  display: flex;
+  align-items: stretch;
+  height: auto; /* 高さを強制しない。カードは内容に合わせる */
 }
 
 /* JSクラス名: board-task-item */
@@ -153,7 +153,7 @@ h2 {
   
   width: 100%; /* 親(ラッパー)の幅いっぱいに広がる */
   height: auto;
-  min-height: 100%; /* 同じ行のカードと高さを揃える */
+  min-height: 120px; /* 適度な高さを確保してレイアウト崩れを防ぐ */
   
   box-sizing: border-box;
   box-shadow: var(--shadow);
@@ -207,7 +207,7 @@ h2 {
 }
 
 
-.complete-btn, 
+.complete-btn,
 .add-btn {
   background: var(--surface-sub);
   border: 1px solid var(--border);
@@ -217,9 +217,7 @@ h2 {
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
-  
-  align-self: flex-end; /* ★重要: 右寄せ */
-  margin-left: 0; 
+  margin-left: 0;
 }
 
 .complete-btn:hover,
@@ -316,6 +314,17 @@ input:focus, textarea:focus {
   overflow-x: auto;
   padding-bottom: 16px;
 }
+
+/* メンバー追加エリアのインライン配置調整 */
+.member-task-adder {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.member-task-adder select { min-width: 160px; }
+.member-task-adder form { display: inline-flex; gap: 8px; align-items: center; }
+.member-task-adder input[type="text"] { flex: 1; min-width: 120px; }
+.member-task-adder .add-btn { flex: 0 0 auto; }
 
 .member-task-item {
   background: var(--surface-sub);
