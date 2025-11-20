@@ -34,7 +34,21 @@ function App() {
     } catch (e) { console.warn('load group failed', e); }
     try {
       const rawM = localStorage.getItem('membersTasks');
-      if (rawM) setMembersTasks(JSON.parse(rawM));
+      if (rawM) {
+        // normalize ids so they are globally unique: if a task id doesn't include the member prefix, add it.
+        const parsed = JSON.parse(rawM);
+        const normalized = {};
+        Object.keys(parsed).forEach(member => {
+          const list = Array.isArray(parsed[member]) ? parsed[member] : [];
+          normalized[member] = list.map(t => {
+            const origId = (t && t.id) ? String(t.id) : '';
+            // if id already starts with the member name, keep it; otherwise prefix
+            const newId = origId && origId.startsWith(member + '-') ? origId : `${member}-${origId || Date.now()}`;
+            return { ...t, id: newId, member };
+          });
+        });
+        setMembersTasks(normalized);
+      }
     } catch (e) { console.warn('load members failed', e); }
   }, []);
 
