@@ -348,6 +348,18 @@ input:focus, textarea:focus {
 .member-task-adder input[type="text"] { flex: 1; min-width: 120px; }
 .member-task-adder .add-btn { flex: 0 0 auto; }
 
+/* 明示的に入力欄を白文字にする（ダーク背景で見切れないように） */
+.member-task-adder input[type="text"],
+.member-task-adder select,
+.member-task-adder button {
+  color: var(--text-main);
+  background: var(--surface-sub);
+  border: 1px solid var(--border);
+}
+.member-task-adder input[type="text"]::placeholder {
+  color: var(--text-muted);
+}
+
 .member-task-item {
   background: var(--surface-sub);
   padding: 10px;
@@ -357,6 +369,14 @@ input:focus, textarea:focus {
   gap: 8px;
   text-align: left;
   min-height: 96px;
+}
+
+.member-task-item span {
+  color: var(--text-main);
+}
+.member-task-item input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
 }
 
 .issue-detail-card {

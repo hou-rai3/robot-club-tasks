@@ -106,8 +106,9 @@ function MembersView({ tasks: propTasks = {}, onAddTask, onToggleComplete, onMov
       >
         <div className="members-task-container">
           {initialMembers.map(member => {
-            const incompleteTasks = tasks[member].filter(t => !t.completed);
-            const completedTasks = tasks[member].filter(t => t.completed);
+            const memberTasks = Array.isArray(tasks[member]) ? tasks[member] : [];
+            const incompleteTasks = memberTasks.filter(t => !t.completed);
+            const completedTasks = memberTasks.filter(t => t.completed);
             return (
               <div key={member} className="member-column">
                 <h3>{member}</h3>
