@@ -3,30 +3,21 @@
    テーマ: Modern Dark & Crimson Red
    ========================================= */
 :root {
-  /* Main Palette */
-  --bg-app: #18181b;           /* 背景：真っ黒ではなく深い亜鉛色(Zinc) */
-  --surface: #27272a;          /* カード背景：少し明るいグレー */
-  --surface-sub: #3f3f46;      /* 入力欄やサブエリアの背景 */
+  --bg-app: #18181b;           /* 背景 */
+  --surface: #27272a;          /* カード背景 */
+  --surface-sub: #3f3f46;      /* 入力欄など */
   
-  /* Accents */
-  --primary: #ef4444;          /* メイン：鮮やかで力強い赤 */
-  --primary-dark: #b91c1c;     /* ホバー時の濃い赤 */
-  --primary-glow: rgba(239, 68, 68, 0.25); /* 赤い光彩 */
+  --primary: #ef4444;          /* 赤 */
+  --primary-dark: #b91c1c;
+  --primary-glow: rgba(239, 68, 68, 0.3);
   
-  /* Text Colors */
-  --text-main: #f4f4f5;        /* メイン文字：ほぼ白に近いグレー */
-  --text-muted: #a1a1aa;       /* 補足文字：中間のグレー */
-  --text-on-primary: #ffffff;
+  --text-main: #f4f4f5;
+  --text-muted: #a1a1aa;
   
-  /* Borders & Shadows */
-  --border: #3f3f46;           /* 境界線：背景に馴染むグレー */
-  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
-  --shadow-glow: 0 0 15px var(--primary-glow); /* かっこいい発光表現 */
+  --border: #3f3f46;
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
   
-  /* Sizes */
-  --radius-md: 12px;
-  --radius-sm: 8px;
+  --radius: 8px;
 }
 
 html, body, #root {
@@ -37,63 +28,62 @@ body {
   margin: 0;
   background-color: var(--bg-app);
   color: var(--text-main);
-  font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
-  -webkit-font-smoothing: antialiased;
+  font-family: 'Inter', sans-serif;
   line-height: 1.6;
+  text-align: left; /* 基本は左揃え */
 }
 
 /* =========================================
-   App Layout & Header (Center Aligned)
+   App Container (幅制限 & 中央配置)
    ========================================= */
-.app {
-  max-width: 1200px;
+.app, .App { /* JS側のクラス名に対応 */
+  max-width: 900px;
   margin: 0 auto;
-  padding: 32px 24px;
-  min-height: 100vh;
+  padding: 40px 24px;
   box-sizing: border-box;
 }
 
+/* =========================================
+   Header (ここだけ中央揃え)
+   ========================================= */
 header {
   display: flex;
   flex-direction: column;
-  align-items: center; /* ヘッダー全体を中央寄せ */
+  align-items: center;
   margin-bottom: 40px;
 }
 
-/* Title Row */
 .title-row {
   display: flex;
   align-items: center;
-  justify-content: center; /* タイトルを中央へ */
+  justify-content: center;
   gap: 16px;
   margin-bottom: 24px;
-  width: 100%;
 }
 
 .title-gif {
-  width: 50px;
-  height: 50px;
-  border-radius: var(--radius-sm);
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius);
   background: var(--surface);
   border: 1px solid var(--border);
   padding: 4px;
-  box-shadow: var(--shadow-glow); /* ロゴを少し光らせる */
+  box-shadow: 0 0 10px var(--primary-glow);
 }
 
 .app-title {
   font-size: 24px;
   font-weight: 800;
-  color: var(--text-main);
-  letter-spacing: 0.05em;
   margin: 0;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  letter-spacing: 0.05em;
+  text-align: center;
 }
 
-/* Navigation Tabs */
+/* Navigation */
 nav {
   display: flex;
-  justify-content: center; /* ナビゲーションも中央へ */
-  gap: 12px;
+  justify-content: center;
+  gap: 10px;
   width: 100%;
   border-bottom: 1px solid var(--border);
   padding-bottom: 20px;
@@ -101,324 +91,253 @@ nav {
 
 nav button {
   background: transparent;
-  border: 1px solid transparent;
-  padding: 8px 24px;
-  border-radius: 20px;
-  font-size: 14px;
-  font-weight: 600;
+  border: none;
+  padding: 8px 20px;
   color: var(--text-muted);
+  font-weight: bold;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-nav button:hover {
-  color: var(--text-main);
-  background-color: var(--surface-sub);
+  border-radius: 20px;
+  transition: all 0.2s;
 }
 
 nav button.active {
-  background-color: var(--primary); /* アクティブ時は赤背景 */
-  color: var(--text-on-primary);
-  box-shadow: var(--shadow-glow);
-  border-color: var(--primary);
+  background: var(--primary);
+  color: white;
+  box-shadow: 0 0 10px var(--primary-glow);
 }
 
 /* =========================================
-   Headings & Typography
+   Headings (中央揃え)
    ========================================= */
-/* アプリ内のすべての主要見出しを中央寄せにする */
 h1, h2, h3 {
   text-align: center;
+  margin-top: 0;
   color: var(--text-main);
 }
 
 h2 {
+  margin-bottom: 24px;
   font-size: 20px;
-  margin-bottom: 20px;
-  border-left: none; /* 左の装飾を削除して中央重視に */
 }
 
 /* =========================================
-   Board & Columns
+   Task Board & Items (JS構造に対応)
    ========================================= */
-.board {
+/* JSクラス名: task-board */
+.task-board {
   display: grid;
-  gap: 30px;
+  /* auto-fit: アイテムが少ない時も横幅いっぱいに広がる */
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  width: 100%;
+  margin-bottom: 24px; /* 下のフォームとの距離 */
 }
 
-.board-row {
-  display: flex;
-  gap: 24px;
-  align-items: flex-start;
+/* React/dnd-kitが生成するラッパーdivへの対策 */
+.task-board > div {
+  display: flex; 
+  align-items: stretch; /* 子要素(カード)をセルの高さ・幅いっぱいに伸ばす */
+  height: 100%;
 }
 
-.column {
-  background-color: transparent;
-  flex: 1;
-  min-width: 280px;
-}
-
-.column-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--text-muted);
-  margin-bottom: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  text-align: center; /* カラムタイトルも中央へ */
-  border-bottom: 2px solid var(--border);
-  padding-bottom: 8px;
-}
-
-/* =========================================
-   Task Cards (Dark Style)
-   ========================================= */
+/* JSクラス名: board-task-item */
 .board-task-item {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   padding: 16px;
-  margin-bottom: 12px;
+  
   display: flex;
-  gap: 14px;
+  flex-direction: column; /* 中身を縦に積む */
+  gap: 10px;
+  
+  width: 100%; /* 親(ラッパー)の幅いっぱいに広がる */
+  height: auto;
+  min-height: 100%; /* 同じ行のカードと高さを揃える */
+  
+  box-sizing: border-box;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s;
+  text-align: left;
   position: relative;
-  transition: all 0.2s ease;
-  box-shadow: var(--shadow-sm);
+  
+  /* JSで border-left が設定されるため overflow: hidden を推奨 */
+  overflow: hidden; 
 }
 
 .board-task-item:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-  border-color: var(--text-muted); /* ホバーで少し明るく */
+  transform: translateY(-2px);
+  border-color: var(--text-muted);
 }
 
-/* Left Accent Bar */
-.left-accent {
-  width: 4px;
-  border-radius: 4px;
-  flex-shrink: 0;
-  box-shadow: 0 0 8px rgba(255,255,255,0.05);
-}
-.left-accent.low { background-color: #52525b; }    /* 暗いグレー */
-.left-accent.medium { background-color: #f59e0b; } /* アンバー（注意） */
-.left-accent.high { 
-  background-color: var(--primary); 
-  box-shadow: 0 0 8px var(--primary); /* 重要項目は赤く光る */
-}
-
+/* タスク内容 */
 .task-content {
-  flex: 1;
+  flex-grow: 1; /* ★重要: これで残りの空間をすべて埋める */
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 }
 
-.task-title {
-  font-size: 15px;
+.task-content h3 {
+  /* h3だがタスク名は左揃えにする */
+  text-align: left; 
+  font-size: 16px;
   font-weight: 600;
-  color: var(--text-main);
   margin: 0;
 }
 
-.task-meta {
-  font-size: 12px;
+.task-content p, 
+.task-content span {
+  font-size: 13px;
   color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  margin: 0;
 }
 
-.task-deadline {
-  font-weight: 700;
-  color: var(--primary); /* 期限は赤文字 */
+/* 完了・ドラッグハンドルのエリア */
+.drag-handle {
+  color: var(--text-muted);
+  cursor: grab;
+  padding: 8px 0;
+  font-size: 20px;
+  align-self: flex-start; /* 左寄せ */
+}
+.drag-handle.disabled {
+  cursor: default;
+  opacity: 0.3;
 }
 
-/* Buttons inside cards */
-.task-actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
 
-.btn {
-  padding: 6px 12px;
-  border-radius: var(--radius-sm);
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  border: 1px solid var(--border);
+.complete-btn, 
+.add-btn {
   background: var(--surface-sub);
+  border: 1px solid var(--border);
   color: var(--text-muted);
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
   transition: all 0.2s;
+  
+  align-self: flex-end; /* ★重要: 右寄せ */
+  margin-left: 0; 
 }
 
-.btn:hover {
-  background: var(--primary);
-  color: #fff;
-  border-color: var(--primary);
-  box-shadow: var(--shadow-glow);
-}
-
-.btn.primary, .add-btn {
+.complete-btn:hover,
+.add-btn:hover {
   background: var(--primary);
   color: white;
-  border: none;
-  box-shadow: var(--shadow-glow);
+  border-color: var(--primary);
 }
 
-.btn.primary:hover, .add-btn:hover {
-  background: var(--primary-dark);
-}
-
-.drag-handle {
-  cursor: grab;
-  color: var(--text-muted);
-  padding: 4px;
-  opacity: 0.5;
-}
-.drag-handle:hover { opacity: 1; }
-
-/* Completed State */
+/* 完了タスク */
 .completed-task {
   opacity: 0.5;
-  background-color: transparent;
-  border-color: transparent;
 }
-.completed-task .task-title {
+.completed-task .task-content h3 {
   text-decoration: line-through;
-  color: var(--text-muted);
 }
 
 /* =========================================
-   Forms (Input Fields)
+   Forms (JSクラス名: overall-form)
    ========================================= */
+.overall-form {
+  margin-top: 0; /* task-board側でmargin-bottomを持たせた */
+  background: var(--surface);
+  padding: 24px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* フォーム内のh3は中央揃え (上のh3設定が効く) */
+
 input[type="text"], 
 input[type="date"], 
 textarea, 
 select {
+  background: var(--surface-sub);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 12px;
+  border-radius: var(--radius);
+  font-size: 14px;
   width: 100%;
   box-sizing: border-box;
-  padding: 12px 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  background: var(--surface-sub); /* 暗い入力欄 */
-  color: var(--text-main);
-  font-size: 14px;
-  transition: all 0.2s;
+  text-align: left; 
 }
 
-input:focus, textarea:focus, select:focus {
+input:focus, textarea:focus {
   outline: none;
   border-color: var(--primary);
   background: var(--surface);
   box-shadow: 0 0 0 2px rgba(239, 68, 68, 0.2);
 }
 
-/* Overall Form Container */
-.overall-form {
-  background: var(--surface);
-  padding: 24px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--border);
-  margin-top: 32px;
-  /* フォーム内の要素も中央寄せしたければ以下を追加 */
-  text-align: center; 
+.overall-form button {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: var(--radius);
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%; 
+  margin-top: 8px;
 }
 
-/* フォーム内の要素配置調整 */
-.overall-form input, 
-.overall-form textarea {
-  margin-bottom: 12px;
-  text-align: left; /* 入力文字は左揃えに戻す */
-}
-.overall-form button {
-  width: 100%; /* ボタンを幅いっぱいに */
-  padding: 12px;
-  font-size: 15px;
+.overall-form button:hover {
+  background: var(--primary-dark);
 }
 
 /* =========================================
-   Members & Robot Group Views
+   Members & Robot Views (他のファイルへの対応)
    ========================================= */
-.members-task-container {
-  display: flex;
-  gap: 20px;
-  overflow-x: auto;
-  padding-bottom: 16px;
-}
-/* Scrollbar styling for dark theme */
-.members-task-container::-webkit-scrollbar { height: 8px; }
-.members-task-container::-webkit-scrollbar-track { background: var(--bg-app); }
-.members-task-container::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
-
-.member-column {
-  min-width: 260px;
+.column {
   background: var(--surface);
   padding: 16px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius);
   border: 1px solid var(--border);
+  min-width: 260px;
 }
 
-.member-column h3 {
-  color: var(--primary);
+.column-title {
+  text-align: center;
+  color: var(--text-muted);
   border-bottom: 1px solid var(--border);
-  padding-bottom: 10px;
-  margin-bottom: 16px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+
+.members-task-container {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 16px;
 }
 
 .member-task-item {
   background: var(--surface-sub);
-  padding: 12px;
-  border-radius: var(--radius-sm);
+  padding: 10px;
   margin-bottom: 8px;
-  border: 1px solid transparent;
+  border-radius: 4px;
   display: flex;
   align-items: center;
   gap: 8px;
-}
-.member-task-item:hover { border-color: var(--text-muted); }
-
-/* Mechanism Editor */
-.mechanism-editor {
-  background: var(--surface);
-  padding: 16px;
-  border-radius: var(--radius-sm);
-  border: 1px solid var(--border);
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  text-align: left;
 }
 
-.status-badge {
-  padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 11px;
-  font-weight: 700;
-  color: #fff;
-}
-.status-評価完了 { background-color: #10b981; }
-.status-微調整中 { background-color: #f59e0b; color: #000; }
-.status-実験待ち { background-color: #3b82f6; }
-.status-未着手   { background-color: #52525b; }
-
-/* =========================================
-   Detail View
-   ========================================= */
 .issue-detail-card {
   background: var(--surface);
-  padding: 40px;
-  border-radius: var(--radius-md);
+  padding: 30px;
+  border-radius: var(--radius);
   border: 1px solid var(--border);
-  max-width: 800px;
-  margin: 0 auto;
-  box-shadow: var(--shadow-glow);
+  text-align: left;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .app { padding: 16px; }
-  .board-row { flex-direction: column; }
+/* レスポンシブ */
+@media (max-width: 600px) {
+  .app, .App { padding: 16px; }
   .title-row { flex-direction: column; }
-  .overall-form button { width: 100%; }
 }

@@ -9,7 +9,7 @@ import {
 import {
   SortableContext,
   useSortable,
-  verticalListSortingStrategy,
+  rectSortingStrategy
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 
@@ -127,7 +127,7 @@ function OverallView({ tasks = [], onAddTask, onToggleComplete, onReorder, onSel
         <div className="task-board">
           <SortableContext
             items={incompleteTasks.map(t => t.id)}
-            strategy={verticalListSortingStrategy}
+            strategy={rectSortingStrategy}
           >
             {/* 未完了タスクのみドラッグ可能 */}
             {incompleteTasks.map(task => (
