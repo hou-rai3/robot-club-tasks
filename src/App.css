@@ -315,6 +315,28 @@ input:focus, textarea:focus {
   padding-bottom: 16px;
 }
 
+/* member-column: show tasks as a two-column grid inside each member box */
+.member-column {
+  background: var(--surface);
+  padding: 12px;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  min-width: 260px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.member-column h3 {
+  text-align: center;
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 8px;
+  margin: 0 0 12px 0;
+  grid-column: 1 / -1; /* title spans both columns */
+}
+
 /* メンバー追加エリアのインライン配置調整 */
 .member-task-adder {
   display: flex;
@@ -329,12 +351,12 @@ input:focus, textarea:focus {
 .member-task-item {
   background: var(--surface-sub);
   padding: 10px;
-  margin-bottom: 8px;
-  border-radius: 4px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
   gap: 8px;
   text-align: left;
+  min-height: 96px;
 }
 
 .issue-detail-card {
