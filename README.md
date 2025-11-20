@@ -53,7 +53,6 @@
 ### 4. タスク詳細の管理
 タスクをクリックすることで、具体的な内容を記述・確認可能である。いつでも編集でき、情報のアップデートに対応する。
 
-<img width="100%" alt="Task Details" src="https://github.com/user-attachments/assets/67c38ddf-5893-4b09-9075-5064500c6f50" />
 
 ---
 
@@ -76,8 +75,7 @@
 ### 遊び心
 * **ユーモアの導入:**
     堅苦しさを排除するため、ユニークなGIFアニメーションを差し込んでいる。ネットミームをオマージュしたタイトルなど、部活の雰囲気を保ちつつ、メンバーが拒否感なく「楽しくタスクを消化できる」空気感を作った。
-
-![Fun Element](https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08)
+<img width="100%" alt="Task Details" src="https://github.com/user-attachments/assets/91ba1a4e-548e-44ce-9d64-c2eb4f7cea08" />
 
 ---
 
